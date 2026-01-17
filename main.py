@@ -42,21 +42,31 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+
         # background color
         screen.fill((0, 0, 0))
 
         # Draw all drawable sprites
-        for _sprite in drawable:
-            _sprite.draw(screen)
+        for sprite in drawable:
+            sprite.draw(screen)
 
         # Update all updatable sprites
         updatable.update(dt)
 
-        for _asteroid in asteroids:
-            if player.collides_with(_asteroid):
+        # Check for collisions between player and asteroids
+        for asteroid in asteroids:
+            if player.collides_with(asteroid):
                 log_event(f"player_hit")
                 print("Game over!")
                 sys.exit()
+        
+        # Check for collisions between shots and asteroids
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collides_with(asteroid):
+                    log_event(f"asteroid_shot")
+                    asteroid.kill()
+                    shot.kill()
 
         # Update the display - actually show the new frame
         pygame.display.flip()
