@@ -31,6 +31,7 @@ def main():
 
         # Draw the player
         player.draw(screen)
+        player.update(dt)
 
         # Update the display - actually show the new frame
         pygame.display.flip()
