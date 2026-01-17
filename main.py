@@ -65,7 +65,7 @@ def main():
             for shot in shots:
                 if shot.collides_with(asteroid):
                     log_event(f"asteroid_shot")
-                    asteroid.kill()
+                    asteroid.split()
                     shot.kill()
 
         # Update the display - actually show the new frame
